@@ -1,5 +1,5 @@
 import { BaseEntity, Customer, generateEntityId } from "@medusajs/medusa";
-import { BeforeInsert, Column, Entity, ManyToOne, OneToOne } from "typeorm";
+import { BeforeInsert, Column, Entity, JoinColumn, ManyToOne } from "typeorm";
 import { AnamnesisForm } from "./anamnesis_form";
 
 @Entity()
@@ -14,6 +14,7 @@ export class AnamnesisResponse extends BaseEntity {
   form_id: string;
 
   @ManyToOne(() => AnamnesisForm)
+  @JoinColumn({ name: "form_id" })
   form: string;
 
   @Column({ type: "jsonb", nullable: true })

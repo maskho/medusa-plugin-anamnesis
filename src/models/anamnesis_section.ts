@@ -8,7 +8,7 @@ export class AnamnesisSection extends BaseEntity {
   form_id: string;
 
   @ManyToOne(() => AnamnesisForm)
-  @JoinColumn()
+  @JoinColumn({ name: "form_id" })
   form: string;
 
   @Column()

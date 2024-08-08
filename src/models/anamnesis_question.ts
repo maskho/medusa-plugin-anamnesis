@@ -26,7 +26,7 @@ export class AnamnesisQuestion extends BaseEntity {
   section_id: string;
 
   @ManyToOne(() => AnamnesisSection)
-  @JoinColumn()
+  @JoinColumn({ name: "section_id" })
   section: string;
 
   @Column()
