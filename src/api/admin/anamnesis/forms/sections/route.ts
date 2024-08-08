@@ -14,10 +14,7 @@ export const POST = async (req: MedusaRequest, res: MedusaResponse) => {
 
     await sectionRepo.save(newSection);
 
-    return res.json({
-      success: true,
-      section: { ...newSection },
-    });
+    return res.json({ success: true, section: { ...newSection } });
   } catch (e) {
     return res.json({ success: false, error: e.toString(), error_obj: e });
   }

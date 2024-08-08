@@ -19,10 +19,7 @@ export const POST = async (req: MedusaRequest, res: MedusaResponse) => {
 
     await formRepo.save(newForm);
 
-    return res.json({
-      success: true,
-      form: { ...newForm },
-    });
+    return res.json({ success: true, form: { ...newForm } });
   } catch (e) {
     return res.json({ success: false, error: e.toString(), error_obj: e });
   }
