@@ -1,4 +1,4 @@
-import { BaseEntity, Customer, generateEntityId } from "@medusajs/medusa";
+import { BaseEntity, generateEntityId } from "@medusajs/medusa";
 import { BeforeInsert, Column, Entity, JoinColumn, ManyToOne } from "typeorm";
 import { AnamnesisForm } from "./anamnesis_form";
 

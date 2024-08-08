@@ -7,7 +7,7 @@ export class AnamnesisSection extends BaseEntity {
   @Column()
   form_id: string;
 
-  @ManyToOne(() => AnamnesisForm)
+  @ManyToOne(() => AnamnesisForm, { onDelete: "CASCADE" })
   @JoinColumn({ name: "form_id" })
   form: string;
 

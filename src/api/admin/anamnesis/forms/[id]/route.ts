@@ -55,3 +55,30 @@ export const GET = async (req: MedusaRequest, res: MedusaResponse) => {
     return res.json({ success: false, error: e.toString(), error_obj: e });
   }
 };
+
+export const DELETE = async (req: MedusaRequest, res: MedusaResponse) => {
+  try {
+    const manager: EntityManager = req.scope.resolve("manager");
+    const formRepo = manager.getRepository(AnamnesisForm);
+
+    let anyreq = req as any;
+    const id = anyreq.params.id;
+    const sanitizedId = SqlSanitization(id).includes("anamnesis_form_")
+      ? SqlSanitization(id)
+      : "anamnesis_form_" + SqlSanitization(id);
+
+    const exists = await formRepo.exist({ where: { id: sanitizedId } });
+
+    if (!exists) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Form not found" });
+    }
+
+    await formRepo.delete({ id: sanitizedId });
+
+    return res.json({ success: true });
+  } catch (e) {
+    return res.json({ success: false, error: e.toString(), error_obj: e });
+  }
+};

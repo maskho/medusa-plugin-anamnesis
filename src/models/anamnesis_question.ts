@@ -1,13 +1,5 @@
 import { BaseEntity, generateEntityId } from "@medusajs/medusa";
-import {
-  BeforeInsert,
-  Column,
-  Entity,
-  JoinColumn,
-  ManyToOne,
-  OneToOne,
-  PrimaryGeneratedColumn,
-} from "typeorm";
+import { BeforeInsert, Column, Entity, JoinColumn, ManyToOne } from "typeorm";
 import { AnamnesisSection } from "./anamnesis_section";
 
 export enum QuestionType {
@@ -25,7 +17,7 @@ export class AnamnesisQuestion extends BaseEntity {
   @Column()
   section_id: string;
 
-  @ManyToOne(() => AnamnesisSection)
+  @ManyToOne(() => AnamnesisSection, { onDelete: "CASCADE" })
   @JoinColumn({ name: "section_id" })
   section: string;
 
