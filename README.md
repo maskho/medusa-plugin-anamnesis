@@ -1,70 +1,106 @@
-<p align="center">
-  <a href="https://www.medusajs.com">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://user-images.githubusercontent.com/59018053/229103275-b5e482bb-4601-46e6-8142-244f531cebdb.svg">
-    <source media="(prefers-color-scheme: light)" srcset="https://user-images.githubusercontent.com/59018053/229103726-e5b529a3-9b3f-4970-8a1f-c6af37f087bf.svg">
-    <img alt="Medusa logo" src="https://user-images.githubusercontent.com/59018053/229103726-e5b529a3-9b3f-4970-8a1f-c6af37f087bf.svg">
-    </picture>
-  </a>
-</p>
-<h1 align="center">
-  Medusa
-</h1>
+# medusa-plugin-anamnesis
 
-<h4 align="center">
-  <a href="https://docs.medusajs.com">Documentation</a> |
-  <a href="https://www.medusajs.com">Website</a>
-</h4>
+`medusa-plugin-anamnesis` is a custom plugin for the Medusa backend, designed to extend its functionality. This plugin requires a pre-existing Medusa backend, which can be set up using the official documentation or through a new Medusa application installation.
 
-<p align="center">
-  Building blocks for digital commerce
-</p>
-<p align="center">
-  <a href="https://github.com/medusajs/medusa/blob/master/CONTRIBUTING.md">
-    <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat" alt="PRs welcome!" />
-  </a>
-    <a href="https://www.producthunt.com/posts/medusa"><img src="https://img.shields.io/badge/Product%20Hunt-%231%20Product%20of%20the%20Day-%23DA552E" alt="Product Hunt"></a>
-  <a href="https://discord.gg/xpCwq3Kfn8">
-    <img src="https://img.shields.io/badge/chat-on%20discord-7289DA.svg" alt="Discord Chat" />
-  </a>
-  <a href="https://twitter.com/intent/follow?screen_name=medusajs">
-    <img src="https://img.shields.io/twitter/follow/medusajs.svg?label=Follow%20@medusajs" alt="Follow @medusajs" />
-  </a>
-</p>
+## Prerequisites
 
-## Compatibility
+Before you can install `medusa-plugin-anamnesis` locally, you need to have a Medusa backend already installed. You can set this up by following the instructions from the Medusa documentation:
 
-This starter is compatible with versions >= 1.8.0 of `@medusajs/medusa`. 
+- [Official Medusa Backend Installation Guide](https://docs.medusajs.com/development/backend/install)
 
-## Getting Started
+Alternatively, you can create a new Medusa app using:
 
-Visit the [Quickstart Guide](https://docs.medusajs.com/create-medusa-app) to set up a server.
+```bash
+npx create-medusa-app@latest
+```
 
-Visit the [Docs](https://docs.medusajs.com/development/backend/prepare-environment) to learn more about our system requirements.
+## Installation
 
-## What is Medusa
+To install `medusa-plugin-anamnesis`, follow these steps:
 
-Medusa is a set of commerce modules and tools that allow you to build rich, reliable, and performant commerce applications without reinventing core commerce logic. The modules can be customized and used to build advanced ecommerce stores, marketplaces, or any product that needs foundational commerce primitives. All modules are open-source and freely available on npm.
+1.  **Clone the Repository**  
+    Start by cloning the repository to your local machine:
 
-Learn more about [Medusa’s architecture](https://docs.medusajs.com/development/fundamentals/architecture-overview) and [commerce modules](https://docs.medusajs.com/modules/overview) in the Docs.
+    ```bash
+    git clone https://github.com/maskho/medusa-plugin-anamnesis.git
+    cd medusa-plugin-anamnesis`
+    ```
 
-## Roadmap, Upgrades & Plugins
+2.  **Install Dependencies**
+    Install the necessary dependencies:
 
-You can view the planned, started and completed features in the [Roadmap discussion](https://github.com/medusajs/medusa/discussions/categories/roadmap).
+    ```bash
+    npm install
+    ```
 
-Follow the [Upgrade Guides](https://docs.medusajs.com/upgrade-guides/) to keep your Medusa project up-to-date.
+3.  **Prepare the Plugin**  
+    Prepare the plugin for integration:
 
-Check out all [available Medusa plugins](https://medusajs.com/plugins/).
+    ```bash
+    npm run prepare
+    ```
 
-## Community & Contributions
+4.  **Link the Plugin**
+    Create a symbolic link within the plugin directory:
 
-The community and core team are available in [GitHub Discussions](https://github.com/medusajs/medusa/discussions), where you can ask for support, discuss roadmap, and share ideas.
+    ```bash
+    npm link
+    ```
 
-Join our [Discord server](https://discord.com/invite/medusajs) to meet other community members.
+    Then, link it within your Medusa backend directory:
 
-## Other channels
+    ```bash
+    npm link medusa-plugin-anamnesis
+    ```
 
-- [GitHub Issues](https://github.com/medusajs/medusa/issues)
-- [Twitter](https://twitter.com/medusajs)
-- [LinkedIn](https://www.linkedin.com/company/medusajs)
-- [Medusa Blog](https://medusajs.com/blog/)
+5.  **Configure the Plugin**
+    Add the plugin to your `medusa-config.js` with the necessary options:
+
+    ```javascript
+    const  plugins  = [
+        // Other plugins,
+    `	{
+            resolve: "medusa-plugin-anamnesis",
+            options: {
+                enableUI: true
+            }
+        }
+    ]
+    ```
+
+6.  **Handle Dependency Errors**
+    To prevent any dependency conflicts, remove the Medusa core from the plugin's `node_modules`:
+
+    ```bash
+    rm -rf node_modules/medusa-plugin-anamnesis/node_modules/@medusajs/medusa
+    ```
+
+7.  **Run Migrations**
+    Execute required migrations:
+
+    ```bash
+    npx medusa migrations run
+    ```
+
+8.  **Start Development Server**  
+    Finally, launch your development server with symlink preservation:
+
+    ```bash
+    npm run dev -- --preserve-symlinks
+    ```
+
+## Usage
+
+With `medusa-plugin-anamnesis` installed, you can start your Medusa backend to take advantage of the anamnesis form features provided by the plugin.
+
+## API Documentation
+
+To explore the API documentation for `medusa-plugin-anamnesis`, please visit our Postman documentation:
+
+[View API Documentation on Postman](https://documenter.getpostman.com/view/36013532/2sA3s3GAYq)
+
+This documentation provides detailed instructions and interactive examples for using the APIs provided by the `medusa-plugin-anamnesis`. It's an excellent resource for understanding how to integrate and utilize the plugin effectively within your Medusa backend.
+
+## Support
+
+Contact syeh.ak@gmail.com for issues.
