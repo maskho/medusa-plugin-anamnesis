@@ -10,6 +10,24 @@ export const POST = async (req: MedusaRequest, res: MedusaResponse) => {
     let anyreq = req as any;
     let section = { ...anyreq.body };
 
+    if (!section.order) {
+      const maxOrder = await sectionRepo
+        .createQueryBuilder("section")
+        .select("MAX(section.order)", "max_order")
+        .getRawOne();
+
+      section.order = maxOrder.max_order + 1;
+    } else {
+      await sectionRepo
+        .createQueryBuilder("section")
+        .update(AnamnesisSection)
+        .set({
+          order: () => "order + 1",
+        })
+        .where("order >= :order", { order: section.order })
+        .execute();
+    }
+
     const newSection = sectionRepo.create(section);
 
     await sectionRepo.save(newSection);

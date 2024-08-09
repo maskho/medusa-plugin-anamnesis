@@ -22,6 +22,18 @@ export const DELETE = async (req: MedusaRequest, res: MedusaResponse) => {
         .json({ success: false, message: "Section not found" });
     }
 
+    // Update order of sections
+    await sectionRepo
+      .createQueryBuilder("section")
+      .update(AnamnesisSection)
+      .set({
+        order: () => "order - 1",
+      })
+      .where("order > (SELECT order FROM anamnesis_section WHERE id = :id)", {
+        id: sanitizedId,
+      })
+      .execute();
+
     await sectionRepo.delete({ id: sanitizedId });
 
     return res.json({ success: true });
