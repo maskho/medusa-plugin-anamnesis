@@ -1,10 +1,16 @@
 import { MedusaRequest, MedusaResponse } from "@medusajs/medusa";
-import { getFormsRoute } from "../../../../utils/get_forms_route";
 import { EntityManager } from "typeorm";
 import { AnamnesisForm } from "../../../../models/anamnesis_form";
 
 export const GET = async (req: MedusaRequest, res: MedusaResponse) => {
-  return getFormsRoute(req, res);
+  try {
+    const manager: EntityManager = req.scope.resolve("manager");
+    const formRepo = manager.getRepository("AnamnesisForm");
+
+    return res.json({ success: true, forms: await formRepo.find() });
+  } catch (e) {
+    return res.json({ success: false, error: e.toString(), error_obj: e });
+  }
 };
 
 export const POST = async (req: MedusaRequest, res: MedusaResponse) => {

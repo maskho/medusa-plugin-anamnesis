@@ -38,7 +38,7 @@ export const POST = async (req: MedusaRequest, res: MedusaResponse) => {
     });
 
     const responseMap = response.responses.reduce((acc, r) => {
-      acc[r.qiestion_id] = r.answer;
+      acc[r.question_id] = r.answer;
       return acc;
     }, {});
 
@@ -47,7 +47,7 @@ export const POST = async (req: MedusaRequest, res: MedusaResponse) => {
     if (missingQuestions.length > 0) {
       return res
         .status(400)
-        .json({ success: false, message: "Missing answers" }); // TODO: Fix this
+        .json({ success: false, message: "Missing answers" });
     }
 
     const newResponse = responseRepo.create(response);

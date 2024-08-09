@@ -1,8 +1,8 @@
 import { MedusaRequest, MedusaResponse } from "@medusajs/medusa";
-import { AnamnesisForm } from "../../../../models/anamnesis_form";
-import { AnamnesisQuestion } from "../../../../models/anamnesis_question";
-import { AnamnesisSection } from "../../../../models/anamnesis_section";
-import { SqlSanitization } from "../../../../utils/sql_sanitization";
+import { AnamnesisForm } from "../../../../../models/anamnesis_form";
+import { AnamnesisQuestion } from "../../../../../models/anamnesis_question";
+import { AnamnesisSection } from "../../../../../models/anamnesis_section";
+import { SqlSanitization } from "../../../../../utils/sql_sanitization";
 import { EntityManager } from "typeorm";
 
 export const GET = async (req: MedusaRequest, res: MedusaResponse) => {
